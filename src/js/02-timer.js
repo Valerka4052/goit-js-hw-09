@@ -1,14 +1,16 @@
 
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+import Notiflix from 'notiflix';
+
 const satrtButton = document.querySelector('[data-start]');
 const inputDate = document.querySelector('input#datetime-picker');
 const daysId = document.querySelector('[data-days]');
 const hoursId = document.querySelector('[data-hours]');
 const minutesId = document.querySelector('[data-minutes]');
 const secondsId = document.querySelector('[data-seconds]');
-let idTime = false;
-const calendar = flatpickr(inputDate, {
+
+flatpickr(inputDate, {
     enableTime: true,
     time_24hr: true,
     defaultDate: new Date(),
@@ -22,6 +24,9 @@ satrtButton.disabled = true;
 
 satrtButton.addEventListener('click', startTimer);
 
+function addLeadingZero(value) {
+   return String(value).padStart(2,0);
+}
 function startTimer() {
     satrtButton.disabled = true;
     const intervalID = setInterval(() => {
@@ -31,19 +36,15 @@ function startTimer() {
         const timer = convertMs(chosenDate - actuallyTime)
         console.log(timer);
         refreshHtml(timer);
-        stopTimer(intervalID)
-        idTime = true;
-    }, 1000);
-    if (idTime) {
-        clearInterval(intervalID);
-        return;
-    };
-};
+        inputDate.disabled = true;
+        stopTimer(intervalID);
+        }, 1000);
+  };
 function refreshHtml({ days, hours, minutes, seconds }) {
-    daysId.innerHTML = String(days).padStart(2,0);
-    hoursId.innerHTML = String(hours).padStart(2,0);;
-    minutesId.innerHTML = String(minutes).padStart(2,0);
-    secondsId.innerHTML = String(seconds).padStart(2,0);
+    daysId.innerHTML = addLeadingZero(days);
+    hoursId.innerHTML = addLeadingZero(hours);
+    minutesId.innerHTML = addLeadingZero(minutes);
+    secondsId.innerHTML = addLeadingZero(seconds);
 };
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -62,17 +63,18 @@ function convertMs(ms) {
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
-}
+};
 function activeBtn(date) {
     if (Date.now() <= date) {
         satrtButton.disabled = false;
         return;
     };
-    window.alert('Please choose a date in the future');
+    // window.alert('Please choose a date in the future');
+    Notiflix.Notify.failure('Please choose a date in the future');
 };
 function stopTimer(intervalID) {
     if (daysId.innerHTML === '00' && hoursId.innerHTML === '00' && minutesId.innerHTML === '00' && secondsId.innerHTML === '00') {
         clearInterval(intervalID);
-        alert('Time is up');
-    };
+        inputDate.disabled = false;
+        };
 };
