@@ -3,7 +3,7 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import Notiflix from 'notiflix';
 
-const satrtButton = document.querySelector('[data-start]');
+const startButton = document.querySelector('[data-start]');
 const inputDate = document.querySelector('input#datetime-picker');
 const daysId = document.querySelector('[data-days]');
 const hoursId = document.querySelector('[data-hours]');
@@ -20,17 +20,17 @@ flatpickr(inputDate, {
     activeBtn(teamMeetingDate)
     },
 });
-satrtButton.disabled = true;
+startButton.disabled = true;
 
-satrtButton.addEventListener('click', startTimer);
+startButton.addEventListener('click', startTimer);
 
 function addLeadingZero(value) {
    return String(value).padStart(2,0);
 }
 function startTimer() {
-    satrtButton.disabled = true;
+    startButton.disabled = true;
     const intervalID = setInterval(() => {
-        satrtButton.disabled = true;
+        startButton.disabled = true;
         const chosenDate = new Date(inputDate.value).getTime();
         const actuallyTime = Date.now();
         const timer = convertMs(chosenDate - actuallyTime)
@@ -66,7 +66,7 @@ function convertMs(ms) {
 };
 function activeBtn(date) {
     if (Date.now() <= date) {
-        satrtButton.disabled = false;
+        startButton.disabled = false;
         return;
     };
     // window.alert('Please choose a date in the future');
