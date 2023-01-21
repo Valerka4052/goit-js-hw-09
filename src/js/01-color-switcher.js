@@ -7,7 +7,7 @@ startButton.addEventListener('click', changeColor);
 stopButton.addEventListener('click', stopChangeColor);
 
 function changeColor() {
-    interval = setInterval(() => {
+    const interval = setInterval(() => {
         body.style.backgroundColor = getRandomHexColor();
     }, 1000);
        startButton.disabled = true;
