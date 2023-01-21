@@ -1,4 +1,3 @@
-
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import Notiflix from 'notiflix';
@@ -9,7 +8,10 @@ const daysId = document.querySelector('[data-days]');
 const hoursId = document.querySelector('[data-hours]');
 const minutesId = document.querySelector('[data-minutes]');
 const secondsId = document.querySelector('[data-seconds]');
+
 let intervalID = null;
+startButton.disabled = true;
+
 flatpickr(inputDate, {
     enableTime: true,
     time_24hr: true,
@@ -19,11 +21,14 @@ flatpickr(inputDate, {
     const teamMeetingDate = new Date(selectedDates[0]).getTime();
         activeBtn(teamMeetingDate)
         if(intervalID){
-        clearInterval(intervalID)
+            clearInterval(intervalID)
+            daysId.innerHTML = '00';
+    hoursId.innerHTML = '00';
+    minutesId.innerHTML = '00';
+    secondsId.innerHTML = '00';
         }
     },
 });
-startButton.disabled = true;
 
 startButton.addEventListener('click', startTimer);
 
