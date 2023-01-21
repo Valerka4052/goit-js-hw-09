@@ -23,9 +23,9 @@ flatpickr(inputDate, {
         if(intervalID){
             clearInterval(intervalID)
             daysId.innerHTML = '00';
-    hoursId.innerHTML = '00';
-    minutesId.innerHTML = '00';
-    secondsId.innerHTML = '00';
+            hoursId.innerHTML = '00';
+            minutesId.innerHTML = '00';
+            secondsId.innerHTML = '00';
         }
     },
 });
@@ -77,6 +77,7 @@ function activeBtn(date) {
         startButton.disabled = false;
         return;
     };
+    startButton.disabled = true;
     // window.alert('Please choose a date in the future');
     Notiflix.Notify.failure('Please choose a date in the future');
 };
