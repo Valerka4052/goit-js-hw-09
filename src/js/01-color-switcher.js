@@ -1,13 +1,14 @@
 const startButton = document.querySelector('button[data-start]');
 const stopButton = document.querySelector('button[data-stop]');
 const body = document.querySelector('body');
+let interval = null;
 console.log(body)
 stopButton.disabled = true;
 startButton.addEventListener('click', changeColor);
 stopButton.addEventListener('click', stopChangeColor);
 
 function changeColor() {
-    const interval = setInterval(() => {
+   interval = setInterval(() => {
         body.style.backgroundColor = getRandomHexColor();
     }, 1000);
        startButton.disabled = true;
