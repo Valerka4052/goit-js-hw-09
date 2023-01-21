@@ -1,4 +1,4 @@
-// startButton = document.querySelector('button[data-start]');
+startButton = document.querySelector('button[data-start]');
 // stopButton = document.querySelector('button[data-stop]');
 // body = document.querySelector('body');
 // console.log(body)
@@ -23,4 +23,4 @@
 // function getRandomHexColor() {
 //   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 // };
-console.log('привет')
+console.log(startButton)
