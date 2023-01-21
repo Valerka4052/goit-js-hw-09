@@ -1,10 +1,10 @@
-startButton = document.querySelector('button[data-start]');
-stopButton = document.querySelector('button[data-stop]');
+// startButton = document.querySelector('button[data-start]');
+// stopButton = document.querySelector('button[data-stop]');
 body = document.querySelector('body');
 console.log(body)
-stopButton.disabled = true;
-startButton.addEventListener('click', changeColor);
-stopButton.addEventListener('click', stopChangeColor);
+// stopButton.disabled = true;
+// startButton.addEventListener('click', changeColor);
+// stopButton.addEventListener('click', stopChangeColor);
 
 function changeColor() {
     interval = setInterval(() => {
