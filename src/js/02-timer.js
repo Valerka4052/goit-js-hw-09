@@ -24,7 +24,8 @@ satrtButton.addEventListener('click', startTimer);
 
 function startTimer() {
     satrtButton.disabled = true;
- const intervalID = setInterval(() => {
+    const intervalID = setInterval(() => {
+        satrtButton.disabled = true;
         const chosenDate = new Date(inputDate.value).getTime();
         const actuallyTime = Date.now();
         const timer = convertMs(chosenDate - actuallyTime)
@@ -35,7 +36,6 @@ function startTimer() {
     }, 1000);
     if (idTime) {
         clearInterval(intervalID);
-        console.log('STOP')
         return;
     };
 };
@@ -71,7 +71,7 @@ function activeBtn(date) {
     window.alert('Please choose a date in the future');
 };
 function stopTimer(intervalID) {
-    if (daysId.innerHTML === '00'&&hoursId.innerHTML === '00'&&minutesId.innerHTML === '00'&&secondsId.innerHTML === '00') {
+    if (daysId.innerHTML === '00' && hoursId.innerHTML === '00' && minutesId.innerHTML === '00' && secondsId.innerHTML === '00') {
         clearInterval(intervalID);
         alert('Time is up');
     };
