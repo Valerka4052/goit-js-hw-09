@@ -79,11 +79,12 @@ function activeBtn(date) {
     };
     startButton.disabled = true;
     // window.alert('Please choose a date in the future');
-    Notiflix.Notify.failure('Please choose a date in the future');
+    Notiflix.Report.failure('Please choose a date in the future');
 };
 function stopTimer(intervalID) {
     if (daysId.innerHTML === '00' && hoursId.innerHTML === '00' && minutesId.innerHTML === '00' && secondsId.innerHTML === '00') {
         clearInterval(intervalID);
+        Notiflix.Report.success('Time is UP');
         // inputDate.disabled = false;
         };
 };
