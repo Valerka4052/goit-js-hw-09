@@ -9,10 +9,12 @@ submitButton.addEventListener('click', makePromiseWithDelay);
 
 function makePromiseWithDelay (event) {
   event.preventDefault();
-  submitButton.disabled = true;
   let data = parseInt(firstDelay.value);
   let step = parseInt(delayStep.value);
   let counter = parseInt(amount.value);
+  if (data && step && counter) {
+    submitButton.disabled = true;
+  };
   for (let position = 1; position <= counter; position += 1) {
       createPromise(position, data)
       .then(({ position, delay }) => {
