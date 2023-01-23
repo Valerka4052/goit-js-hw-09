@@ -9,17 +9,24 @@ submitButton.addEventListener('click', makePromiseWithDelay);
 
 function makePromiseWithDelay (event) {
   event.preventDefault();
+  submitButton.disabled = true;
   let data = parseInt(firstDelay.value);
   let step = parseInt(delayStep.value);
   let counter = parseInt(amount.value);
   for (let position = 1; position <= counter; position += 1) {
-    createPromise(position, data)
+      createPromise(position, data)
       .then(({ position, delay }) => {
-        console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        if (position === counter) {
+          submitButton.disabled = false;
+        };
+        // console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
         Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
       })
       .catch(({ position, delay }) => {
-        console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+        if (position === counter) {
+          submitButton.disabled = false;
+        };
+        // console.log(`❌ Rejected promise ${position} in ${delay}ms`);
         Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       });
     data += step;
@@ -35,7 +42,7 @@ function createPromise(position, delay) {
       } else {
         reject({ position, delay });
       };
-    }, delay);
+        }, delay);
   });
 };
 
