@@ -12,8 +12,9 @@ function makePromiseWithDelay (event) {
   let data = parseInt(firstDelay.value);
   let step = parseInt(delayStep.value);
   let counter = parseInt(amount.value);
-  for (let position = 1; position <= counter; position += 1) {
-    createPromise(position, data)
+  let position = 1;
+  const interval= setInterval(() => {
+     createPromise(position, data)
       .then(({ position, delay }) => {
         console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
         Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
@@ -22,8 +23,12 @@ function makePromiseWithDelay (event) {
         console.log(`❌ Rejected promise ${position} in ${delay}ms`);
         Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       });
+    position+=1
     data += step;
-  };
+    if (position === counter+1) {
+      clearInterval(interval)
+    };
+  }, data);
 };
 
 function createPromise(position, delay) {
